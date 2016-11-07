@@ -1,6 +1,6 @@
-import React from "react";
-import {render} from "react-dom";
+import React from 'react';
+import { render } from 'react-dom';
 
-import Main from "./main";
+import Main from './main';
 
-render(<Main/>, document.getElementById("root"));
+render(<Main/>, document.getElementById('root'));
