@@ -23,4 +23,3 @@ export {
 };
 
 export default Map;
-

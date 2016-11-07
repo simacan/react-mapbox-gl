@@ -1,13 +1,8 @@
 import React, { PropTypes } from 'react';
 import isEqual from 'deep-equal';
-import diff from './util/diff';
+import uniqueId from 'lodash/uniqueId';
 
-let index = 0;
-const generateID = () => {
-  const newId = index + 1;
-  index = newId;
-  return index;
-};
+import diff from './util/diff';
 
 export default class Layer extends React.PureComponent {
   static contextTypes = {
@@ -40,7 +35,7 @@ export default class Layer extends React.PureComponent {
 
   hover = [];
 
-  id = this.props.id || `layer-${generateID()}`;
+  id = this.props.id || uniqueId('layer-');
 
   source = {
     type: 'geojson',
@@ -215,4 +210,3 @@ export default class Layer extends React.PureComponent {
     return null;
   }
 }
-
