@@ -1,7 +1,7 @@
 /* eslint-disable no-console, no-param-reassign */
 
 import React, { Component } from 'react';
-import ReactMapboxGl, { Layer, Feature, ScaleControl, ZoomControl, Marker } from 'react-mapbox-gl'; // eslint-disable-line
+import ReactMapboxGl, { FeatureLayer, Feature, ScaleControl, ZoomControl, Marker } from 'react-mapbox-gl'; // eslint-disable-line
 import route from './route.json';
 import config from './config.json';
 import style from './style.json';
@@ -119,7 +119,7 @@ export default class AllShapes extends Component {
         containerStyle={containerStyle}>
         <ScaleControl/>
         <ZoomControl/>
-        <Layer
+        <FeatureLayer
           type="symbol"
           layout={{ 'icon-image': 'harbor-15' }}>
           <Feature
@@ -127,9 +127,9 @@ export default class AllShapes extends Component {
             onHover={this._onHover}
             onEndHover={this._onEndHover}
             onClick={this._onClickMarker}/>
-        </Layer>
+        </FeatureLayer>
 
-        <Layer
+        <FeatureLayer
           id="mapbox-route-example"
           type="line"
           sourceId="route"
@@ -142,18 +142,18 @@ export default class AllShapes extends Component {
             'line-width': 8,
           }}/>
 
-        <Layer
+        <FeatureLayer
           type="line"
           layout={{ 'line-cap': 'round', 'line-join': 'round' }}
           paint={{ 'line-color': '#4790E5', 'line-width': 12 }}>
           <Feature coordinates={mappedRoute}/>
-        </Layer>
+        </FeatureLayer>
 
-        <Layer
+        <FeatureLayer
           type="circle"
           paint={{ 'circle-radius': this.state.circleRadius, 'circle-color': '#E54E52', 'circle-opacity': 0.8 }}>
           <Feature coordinates={mappedRoute[this.state.routeIndex]}/>
-        </Layer>
+        </FeatureLayer>
 
         <Marker
           container={markerContainer}
@@ -161,21 +161,21 @@ export default class AllShapes extends Component {
             <h1>TEST</h1>
         </Marker>
 
-        <Layer
+        <FeatureLayer
           type="fill"
           paint={{ 'fill-color': '#6F788A', 'fill-opacity': 0.7 }}>
           <Feature
             onClick={this._polygonClicked}
             coordinates={polygonCoords}/>
-        </Layer>
+        </FeatureLayer>
 
-        <Layer
+        <FeatureLayer
           type="fill"
           paint={{ 'fill-color': '#3bb2d0', 'fill-opacity': 0.5 }}>
           <Feature
             onClick={this._polygonClicked}
             coordinates={multiPolygonCoords}/>
-        </Layer>
+        </FeatureLayer>
 
       </ReactMapboxGl>
     );

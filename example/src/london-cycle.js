@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Layer, Feature, Popup, ZoomControl } from 'react-mapbox-gl'; // eslint-disable-line
+import ReactMapboxGl, { FeatureLayer, Feature, Popup, ZoomControl } from 'react-mapbox-gl'; // eslint-disable-line
 
 import { parseString } from 'xml2js';
 import { Map } from 'immutable';
@@ -138,7 +138,7 @@ export default class LondonCycle extends Component {
             zoomDiff={1}
             onControlClick={this._onControlClick}/>
 
-          <Layer
+          <FeatureLayer
             type="symbol"
             id="marker"
             layout={{ 'icon-image': 'marker-15' }}>
@@ -153,7 +153,7 @@ export default class LondonCycle extends Component {
                     coordinates={st.get('position')}/>
                 )).toArray()
             }
-          </Layer>
+          </FeatureLayer>
 
           {
             station && end && (

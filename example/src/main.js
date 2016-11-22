@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AllShapes from './all-shapes';
 import LondonCycle from './london-cycle';
 import GeoJSONExample from './geojson-example';
+import Buildings3DExample from './Buildings3DExample';
 
 const examples = [
   {
@@ -15,6 +16,10 @@ const examples = [
   {
     component: GeoJSONExample,
     label: 'GEOJson',
+  },
+  {
+    component: Buildings3DExample,
+    label: '3D Buildings',
   },
 ];
 

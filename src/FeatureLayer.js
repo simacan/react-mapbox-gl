@@ -16,9 +16,11 @@ export default class Layer extends React.PureComponent {
       'symbol',
       'line',
       'fill',
+      'fill-extrusion',
       'circle',
     ]),
 
+    filter: PropTypes.array,
     layout: PropTypes.object,
     paint: PropTypes.object,
     sourceOptions: PropTypes.object,
@@ -30,6 +32,7 @@ export default class Layer extends React.PureComponent {
   static defaultProps = {
     type: 'symbol',
     layout: {},
+    filter: null,
     paint: {},
   };
 
@@ -129,9 +132,16 @@ export default class Layer extends React.PureComponent {
 
   componentWillMount() {
     const { id, source } = this;
-    const { type, layout, paint, layerOptions, sourceId, before } = this.props;
+    const {
+      type,
+      layout,
+      paint,
+      layerOptions,
+      sourceId,
+      before,
+      filter,
+     } = this.props;
     const { map } = this.context;
-
     const layer = {
       id,
       source: sourceId || id,
@@ -140,6 +150,10 @@ export default class Layer extends React.PureComponent {
       paint,
       ...layerOptions,
     };
+
+    if (filter) {
+      layer.filter = filter;
+    }
 
     if (!sourceId) {
       map.addSource(id, source);
