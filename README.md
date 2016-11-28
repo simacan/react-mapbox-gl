@@ -1,18 +1,18 @@
 # react-mapbox-gl
 
-![London cycle example gif](docs/london-cycle-example.gif "London cycle example gif")
-
-Based on [mapbox-gl-js](https://www.mapbox.com/mapbox-gl-js/api/) this library aim to bring the api to a React friendly way with some additional extra behavior.
+Forked from [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl)
+Which is based on [mapbox-gl-js](https://www.mapbox.com/mapbox-gl-js/api/) this library aims to bring the mapbox API to a React friendly way with some additional extra behavior.
 The library include the following elements :
 
-- ReactMapboxGl
-- Layer
+- ReactMapboxGl (the map wrapper itself)
+- FeatureLayer (layer that contains features)
 - GeoJSONLayer
 - Marker (Html marker)
 - Feature
   - Layer type properties `symbol` display a mapbox symbol.
   - Layer type properties `line` display a lineString.
   - Layer type properties `fill` display a polygon.
+  - Layer type properties `fill-extrusion` to display a 3d extrusion layer.
   - Layer type properties `circle` display a mapbox circle.
 - ZoomControl
 - ScaleControl
@@ -21,18 +21,18 @@ The library include the following elements :
 ## How to start
 
 ```
-npm install react-mapbox-gl --save
+npm install simacan-react-mapbox-gl --save
 ```
 
 Import the component :
 
 ```
 // ES6
-import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { FeatureLayer, Feature, Marker } from "react-mapbox-gl";
 
 // ES5
 var ReactMapboxGl = require("react-mapbox-gl");
-var Layer = ReactMapboxGl.Layer;
+var Layer = ReactMapboxGl.FeatureLayer;
 var Feature = ReactMapboxGl.Feature;
 ```
 

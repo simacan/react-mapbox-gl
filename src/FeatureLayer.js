@@ -4,7 +4,7 @@ import uniqueId from 'lodash/uniqueId';
 
 import diff from './util/diff';
 
-export default class Layer extends React.PureComponent {
+export default class FeatureLayer extends React.PureComponent {
   static contextTypes = {
     map: PropTypes.object,
   };
@@ -86,15 +86,17 @@ export default class Layer extends React.PureComponent {
     const { id } = this;
     const features = map.queryRenderedFeatures(evt.point, { layers: [id] });
 
-    features.forEach((feature) => {
-      const { properties } = feature;
-      const child = children[properties.id];
+    if (features) {
+      features.forEach((feature) => {
+        const { properties } = feature;
+        const child = children[properties.id];
 
-      const onClick = child && child.props.onClick;
-      if (onClick) {
-        onClick({ ...evt, feature, map });
-      }
-    });
+        const onClick = child && child.props.onClick;
+        if (onClick) {
+          onClick({ ...evt, feature, map });
+        }
+      });
+    }
   };
 
   onMouseMove = (evt) => {

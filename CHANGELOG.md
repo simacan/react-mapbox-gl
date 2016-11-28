@@ -1,3 +1,13 @@
+## 0.18.0 (October 23 2016)
+
+:warning: BREAKING :warning:
+- Renamed layer to FeatureLayer to more accurately describe what it actually does
+
+- Upgrade mapbox-gl to v0.28.0
+- Added the fill-extrusion option (including example)
+- General dep upgrade
+- General linting fixes
+
 ## 0.15.0 (October 23 2016)
 
 - Upgrade mapbox-gl from v0.21.0 to v0.25.1 and don't build the vendor anymore, react-mapbox-gl is now using mapbox-gl/dist/mapbox-gl.js bundle again

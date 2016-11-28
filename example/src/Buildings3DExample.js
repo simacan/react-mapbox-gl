@@ -48,7 +48,6 @@ export default class Buildings3DExample extends Component {
             'fill-extrusion-opacity': 0.6,
           }}
           layerOptions={{
-            id: 'buildings',
             source: 'composite',
             'source-layer': 'building',
           }}
