@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import { Component, PropTypes } from 'react';
 import { List } from 'immutable';
 import isEqual from 'deep-equal';
 import uniqueId from 'lodash/uniqueId';
@@ -11,19 +11,8 @@ export default class RasterLayer extends Component {
   static propTypes = {
     id: PropTypes.string,
     sourceId: PropTypes.string,
-    urlProps: React.PropTypes.shape({
-      baseUrl: PropTypes.string,
-      service: PropTypes.string,
-      bbox: PropTypes.string,
-      format: PropTypes.string,
-      width: PropTypes.number,
-      srs: PropTypes.string,
-      height: PropTypes.number,
-      request: PropTypes.string,
-      layers: PropTypes.string,
-      transparent: PropTypes.boolean,
-      layerName: PropTypes.string,
-    }),
+    url: PropTypes.string,
+    urlProps: PropTypes.object,
     minZoom: PropTypes.number,
     maxZoom: PropTypes.number,
     tileSize: PropTypes.number,
@@ -37,6 +26,7 @@ export default class RasterLayer extends Component {
     minZoom: 0,
     maxZoom: 22,
     filter: null,
+    tileSize: 512,
     paint: {},
     layout: {},
   };
@@ -92,8 +82,7 @@ export default class RasterLayer extends Component {
   }
 
   isWMSSource() {
-    const urlProps = this.props.urlProps;
-    if (urlProps.baseUrl && urlProps.baseUrl.indexOf('mapbox://') !== -1) {
+    if (this.props.url && this.props.url.indexOf('mapbox://') !== -1) {
       return false;
     }
     return true;
@@ -101,27 +90,22 @@ export default class RasterLayer extends Component {
 
   buildRasterUrl() {
     const urlProps = this.props.urlProps;
-    if (urlProps.baseUrl && urlProps.baseUrl.indexOf('mapbox://') !== -1) {
-      return urlProps.baseUrl;
+    if (this.props.url && this.props.url.indexOf('mapbox://') !== -1) {
+      return this.props.url;
     }
-    const urlOptions = List([
-      'service',
-      'bbox',
-      'format',
-      'width',
-      'transparent',
-      'version',
-      'layerName',
-      'srs',
-      'height',
-      'request',
-      'layers',
-    ]);
+
+    // include both lower and uppercase, different api's accept different values
+    this.props.urlProps.WIDTH = this.props.tileSize;
+    this.props.urlProps.HEIGHT = this.props.tileSize;
+    this.props.urlProps.height = this.props.tileSize;
+    this.props.urlProps.width = this.props.tileSize;
+
+    const urlOptions = List(Object.keys(this.props.urlProps));
 
     const optionsBuild = urlOptions
       .filter(item => urlProps[item] !== null && urlProps[item] !== undefined)
       .map(item => `${item}=${urlProps[item]}`);
-    return `${urlProps.baseUrl}?${optionsBuild.join('&')}`;
+    return `${this.props.url}?${optionsBuild.join('&')}`;
   }
 
   render() {

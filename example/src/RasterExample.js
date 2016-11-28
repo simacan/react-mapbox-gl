@@ -31,9 +31,7 @@ export default class RasterExample extends Component {
         <ScaleControl/>
         <ZoomControl/>
         <RasterLayer
-          urlProps={{
-            baseUrl: 'mapbox://mapbox.streets',
-          }}
+          url={'mapbox://mapbox.streets'}
           tileSize={256}
         />
       </ReactMapboxGl>

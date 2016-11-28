@@ -32,7 +32,6 @@ export default class WMSExample extends Component {
         <ZoomControl/>
         <RasterLayer
           urlProps={{
-            baseUrl: 'https://geodata.state.nj.us/imagerywms/Natural2015',
             bbox: '{bbox-epsg-3857}',
             service: 'wms',
             format: 'image/png',
@@ -43,6 +42,7 @@ export default class WMSExample extends Component {
             width: 256,
             height: 256,
           }}
+          url='https://geodata.state.nj.us/imagerywms/Natural2015'
           tileSize={256}
           before='aeroway-taxiway'
         />
