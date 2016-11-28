@@ -3,6 +3,8 @@ import AllShapes from './all-shapes';
 import LondonCycle from './london-cycle';
 import GeoJSONExample from './geojson-example';
 import Buildings3DExample from './Buildings3DExample';
+import WMSExample from './WMSExample';
+import RasterExample from './RasterExample';
 
 const examples = [
   {
@@ -20,6 +22,14 @@ const examples = [
   {
     component: Buildings3DExample,
     label: '3D Buildings',
+  },
+  {
+    component: WMSExample,
+    label: 'WMS Layer',
+  },
+  {
+    component: RasterExample,
+    label: 'Raster Layer',
   },
 ];
 

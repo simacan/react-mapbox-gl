@@ -1,4 +1,8 @@
-## 0.18.0 (October 23 2016)
+## 0.19.0 (November 28 2016)
+
+- Added a RasterLayer for both wms and mapbox raster
+
+## 0.18.0 (November 28 2016)
 
 :warning: BREAKING :warning:
 - Renamed layer to FeatureLayer to more accurately describe what it actually does
