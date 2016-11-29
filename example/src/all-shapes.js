@@ -157,8 +157,12 @@ export default class AllShapes extends Component {
 
         <Marker
           container={markerContainer}
-          coordinates={markerCoord}>
-            <h1>TEST</h1>
+          coordinates={markerCoord}
+          onClick={e => console.log('Clicked the marker', e)}
+        >
+          <h1>
+            TEST
+          </h1>
         </Marker>
 
         <FeatureLayer

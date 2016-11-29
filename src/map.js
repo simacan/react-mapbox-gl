@@ -27,8 +27,11 @@ export default class ReactMapboxGl extends Component {
     onMoveEnd: PropTypes.func,
     onMouseUp: PropTypes.func,
     onDragStart: PropTypes.func,
+    onDragEnd: PropTypes.func,
     onDrag: PropTypes.func,
     onZoom: PropTypes.func,
+    onZoomEnd: PropTypes.func,
+    onZoomStart: PropTypes.func,
     scrollZoom: PropTypes.bool,
     movingMethod: PropTypes.oneOf([
       'jumpTo',
@@ -89,12 +92,15 @@ export default class ReactMapboxGl extends Component {
       onClick,
       onMouseMove,
       onDragStart,
+      onDragEnd,
       onDrag,
       onMouseUp,
       onMove,
       onMoveStart,
       onMoveEnd,
       onZoom,
+      onZoomEnd,
+      onZoomStart,
       scrollZoom,
       attributionPosition,
       interactive,
@@ -147,6 +153,12 @@ export default class ReactMapboxGl extends Component {
       }
     });
 
+    map.on('dragend', (...args) => {
+      if (onDragEnd) {
+        onDragEnd(map, ...args);
+      }
+    });
+
     map.on('drag', (...args) => {
       if (onDrag) {
         onDrag(map, ...args);
@@ -174,6 +186,18 @@ export default class ReactMapboxGl extends Component {
     map.on('moveend', (...args) => {
       if (onMoveEnd) {
         onMoveEnd(map, ...args);
+      }
+    });
+
+    map.on('zoomstart', (...args) => {
+      if (onZoomStart) {
+        onZoomStart(map, ...args);
+      }
+    });
+
+    map.on('zoomend', (...args) => {
+      if (onZoomEnd) {
+        onZoomEnd(map, ...args);
       }
     });
 

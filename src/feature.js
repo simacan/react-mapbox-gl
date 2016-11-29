@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
 
 class Feature extends React.PureComponent {
+  static contextTypes = {
+    map: PropTypes.object,
+  };
+
   render() {
     return null;
   }

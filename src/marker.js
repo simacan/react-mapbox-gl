@@ -10,6 +10,7 @@ export default class ReactMapboxGl extends React.PureComponent {
   static propTypes = {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     container: PropTypes.object,
+    onClick: PropTypes.func,
   }
 
   div = document.createElement('div');
@@ -20,6 +21,7 @@ export default class ReactMapboxGl extends React.PureComponent {
       children,
       coordinates,
       container,
+      onClick,
     } = this.props;
 
     if (container && container.nodeName) {
@@ -27,6 +29,9 @@ export default class ReactMapboxGl extends React.PureComponent {
     }
 
     this.marker = new MapboxGl.Marker(this.div).setLngLat(coordinates);
+    if (onClick) {
+      this.div.addEventListener('click', onClick);
+    }
 
     render(children, this.div, () => {
       this.marker.addTo(map);
@@ -47,8 +52,10 @@ export default class ReactMapboxGl extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    const { marker, div } = this;
-
+    const { marker, div, onClick } = this;
+    if (onClick) {
+      div.removeEventListener('click');
+    }
     marker.remove();
     unmountComponentAtNode(div);
   }

@@ -118,7 +118,6 @@ export default class LondonCycle extends Component {
 
   render() {
     const { stations, station, end, popupShowLabel } = this.state;
-
     return (
       <div>
         <ReactMapboxGl
@@ -129,7 +128,7 @@ export default class LondonCycle extends Component {
           maxZoom={15}
           maxBounds={maxBounds}
           accessToken={accessToken}
-          onDrag={this._onDrag}
+          onDrag={this._onDrag.bind(this)}
           onMoveEnd={this._setMove.bind(this, true)}
           onMove={this._setMove.bind(this, false)}
           containerStyle={containerStyle}>
@@ -149,7 +148,7 @@ export default class LondonCycle extends Component {
                     key={st.get('id')}
                     onHover={this._onToggleHover.bind(this, 'pointer')}
                     onEndHover={this._onToggleHover.bind(this, '')}
-                    onClick={this._markerClick.bind(this, station)}
+                    onClick={this._markerClick.bind(this, st)}
                     coordinates={st.get('position')}/>
                 )).toArray()
             }
