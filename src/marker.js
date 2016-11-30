@@ -11,6 +11,7 @@ export default class ReactMapboxGl extends React.PureComponent {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     container: PropTypes.object,
     onClick: PropTypes.func,
+    zIndex: PropTypes.number,
   }
 
   div = document.createElement('div');
@@ -22,10 +23,17 @@ export default class ReactMapboxGl extends React.PureComponent {
       coordinates,
       container,
       onClick,
+      zIndex,
     } = this.props;
 
     if (container && container.nodeName) {
       this.div = container;
+    }
+
+    this.div.style.position = 'absolute';
+
+    if (zIndex) {
+      this.div.style.zIndex = zIndex;
     }
 
     this.marker = new MapboxGl.Marker(this.div).setLngLat(coordinates);
@@ -40,10 +48,14 @@ export default class ReactMapboxGl extends React.PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { marker, div } = this;
-    const { coordinates, children } = nextProps;
+    const { coordinates, children, zIndex } = nextProps;
 
     if (children) {
       render(children, div);
+    }
+
+    if (this.props.zIndex !== zIndex) {
+      div.style.zIndex = zIndex;
     }
 
     if (this.props.coordinates !== coordinates) {
