@@ -1,6 +1,6 @@
 {
   "name": "simacan-react-mapbox-gl",
-  "version": "0.17.1",
+  "version": "0.17.2",
   "description": "A React binding of mapbox-gl-js",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",

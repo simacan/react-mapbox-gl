@@ -1,7 +1,7 @@
 # react-mapbox-gl
 
 Forked from [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl)
-Which is based on [mapbox-gl-js](https://www.mapbox.com/mapbox-gl-js/api/) this library aims to bring the mapbox API to a React friendly way with some additional extra behavior.
+which is based on [mapbox-gl-js](https://www.mapbox.com/mapbox-gl-js/api/) this library aims to bring the mapbox API to a React friendly way with some additional extra behavior.
 The library include the following elements :
 
 - ReactMapboxGl (the map wrapper itself)
@@ -47,6 +47,8 @@ See https://github.com/alex3165/react-mapbox-gl/issues/57 for more informations.
 - See the example to display a big amount of markers : [London cycle example](example/src/london-cycle.js)
 - See the example to display all the availables shapes : [All shapes example](example/src/all-shapes.js)
 - See the example to display a GEOJson file : [geojson example](example/src/geojson-example.js)
+- See the example to display a WMS layer : [geojson example](example/src/WMSExample.js)
+- See the example to display a Raster layer : [geojson example](example/src/RasterExample.js)
 
 ### Run the examples
 

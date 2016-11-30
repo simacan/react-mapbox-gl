@@ -51,7 +51,15 @@ import ReactMapboxGl from "react-mapbox-gl";
   - Function::(map: Object, event: Object)
 - **onDrag** : `Function` : Simple binding of mapbox `ondrag` event
   - Function::(map: Object, event: Object)
+- **onDragEnd** : `Function` : Simple binding of mapbox `ondragend` event
+  - Function::(map: Object, event: Object)
+- **onDragStart** : `Function` : Simple binding of mapbox `ondragstart` event
+  - Function::(map: Object, event: Object)
 - **onZoom**: `Function` : Executed repeatedly during transitions between zoom levels
+  - Function::(map: Object, event: Object)
+- **onZoomEnd**: `Function` : Executed after the zooming animation ends
+  - Function::(map: Object, event: Object)
+- **onZoomStart**: `Function` : Executed when zooming starts
   - Function::(map: Object, event: Object)
 
 
@@ -83,6 +91,7 @@ import { Layer } from "react-mapbox-gl";
   -  `symbol`, Include a Mapbox `symbol` (`Point` GeoJson)
   - `line`, Include a Mapbox `line` (`LineString` GeoJson)
   - `fill`, Include a Mapbox `polygon` (`Fill` GeoJson)
+  - `fill-extrusion`, .
   - `circle`, Include a Mapbox `circle` (`Point` GeoJson)
 - **layout**: Mapbox layout object passed down to mapbox `addLayer` method [mapbox layout api](https://www.mapbox.com/mapbox-gl-style-spec/#layer-layout)
 - **paint**: Mapbox paint object passed down to mapbox `addLayer` method [mapbox paint api](https://www.mapbox.com/mapbox-gl-style-spec/#layer-paint)
@@ -270,6 +279,8 @@ import { Marker } from "react-mapbox-gl";
 ### Properties
 - **coordinates** *(required)*: `Array of Number` Display the popup at the given position.
 - **container**: `DOMElement` Use the given DOM element to render the children components in.
+- **zIndex**: `Number` Sets the zIndex to the element (either auto created or provided by the `container` property).
+- **onClick**: `Function` Will be called whenever the dom element is clicked on.
 
 ### Example
 
