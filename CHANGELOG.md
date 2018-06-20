@@ -1,3 +1,43 @@
+## Above 2.0.0
+
+See [release notes](https://github.com/alex3165/react-mapbox-gl/releases)
+
+## 2.0.* (June 2017)
+### Breaking changes
+- `ReactMapboxGl` is now a factory that return a React Component, see documentation on how to use it
+
+### Feature
+- `Feature` component has a `draggable` property
+- The map component returned by the factory accept all the events
+- Listen events only on the concerned `Layer`, should improve performances
+
+### Bug fixes
+- `Cluster` component bugs have been fixed, it is tested and should behave as expected
+- Fix issue when using `text-align: center` on a parent tag of the map
+- Fix wrong unmounting of the map
+- Fix `Layer` and `GeoJsonLayer` when changing the style of the map
+
+### Others
+- Improvement of the documentation
+- Brand new website for the examples with more examples
+- Add more tests
+- Prettify all the source files
+- Update dependencies
+
+## 1.4.0 (March 14 2017)
+
+- Breaking change : `onHover` is now `onMouseEnter`, `onEndHover` is now `onMouseLeave`
+- Breaking change: `GEOJSONLayer` is not displaying all the layers in your geojson source, you have to specify which source to display by passing the correct props, see [note](https://github.com/alex3165/react-mapbox-gl/blob/master/docs/API.md#geojsonlayer)
+- Fix issue when unmounting all the features `setData` is not called and the features doesn't disappear. [PR](https://github.com/alex3165/react-mapbox-gl/pull/152)
+
+## 1.0.0 (February 13 2017)
+
+- All the source code is now written in Typescript, you can now get the type definitions for each component in a Typescript environment.
+
+## 0.19.0 (December 12 2016)
+
+- Implement the `Popup` and the `Marker` Components using React. These components now keep track of the context.
+
 ## 0.17.2 (November 30 2016)
 
 ### Features

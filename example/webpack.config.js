@@ -1,35 +1,56 @@
-var webpack = require('webpack')
-var path = require('path')
+var webpack = require('webpack');
+var path = require('path');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
+var env = process.env.NODE_ENV;
+
+var entries = [path.join(__dirname, 'src/index')];
+var output = {
+  filename: 'bundle.js',
+  path: path.join(__dirname, 'dist')
+};
+
+// Add more files to copy to the dist folder (Eventually an assets folder)
+var toCopy = [
+  { from: 'index.html' },
+  { from: 'style.css' }
+];
+
+var plugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(env)
+    }
+  })
+];
+
+var devtool = '';
+
+if (env === 'dev') {
+  // entries = entries.concat(['webpack-dev-server/client?http://localhost:3001']);
+  output.path = __dirname;
+  devtool = 'eval';
+  // plugins.push(new webpack.HotModuleReplacementPlugin());
+} else {
+  plugins = plugins.concat([
+    new CopyWebpackPlugin(toCopy)
+  ]);
+}
 
 module.exports = {
-  watch: true,
-  entry: [
-    './src/index.js'
-  ],
-  devtool: 'cheap-module-eval-source-map',
+  entry: entries,
+  output: output,
+  devtool: devtool,
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    alias: {
-      'react-mapbox-gl': path.join(__dirname, '../lib/index.js')
-    }
+    extensions: ['.ts', '.js', '.tsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        loader: 'babel',
-        include: path.join(__dirname, 'src'),
-        exclude: /node_modules/
-      }, {
-        test: /\.json$/,
-        loader: 'json'
+        test: /\.tsx?$/,
+        loader: 'ts-loader'
       }
     ]
   },
-  output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/static/',
-    filename: 'bundle.js'
-  }
-}
-
+  plugins: plugins
+};

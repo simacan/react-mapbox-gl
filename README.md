@@ -1,64 +1,92 @@
-# react-mapbox-gl
+![Logo](/logo.png)
 
-Forked from [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl)
-which is based on [mapbox-gl-js](https://www.mapbox.com/mapbox-gl-js/api/) this library aims to bring the mapbox API to a React friendly way with some additional extra behavior.
-The library include the following elements :
+# React-mapbox-gl | [Documentation](docs/API.md) | [Demos](http://alex3165.github.io/react-mapbox-gl/demos)
 
-- ReactMapboxGl (the map wrapper itself)
-- FeatureLayer (layer that contains features)
+[![Build Status](https://travis-ci.org/alex3165/react-mapbox-gl.svg?branch=master)](https://travis-ci.org/alex3165/react-mapbox-gl)
+[![npm version](https://img.shields.io/npm/v/react-mapbox-gl.svg?style=flat)](https://www.npmjs.com/package/react-mapbox-gl)
+[![npm downloads](https://img.shields.io/npm/dm/react-mapbox-gl.svg)](https://www.npmjs.com/package/react-mapbox-gl)
+[![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
+<br/>
+
+ #### React wrapper for [mapbox-gl-js](https://www.mapbox.com/mapbox-gl-js/api/).
+<br/><br/>
+![London cycle example gif](docs/london-cycle-example.gif "London cycle example gif")
+
+## Components
+
+### Proxy components (proxy between React and Mapbox API)
+- ReactMapboxGL
+- Layer & Feature
+  - property `symbol` displays a mapbox symbol.
+  - property `line` displays a lineString.
+  - property `fill` displays a polygon.
+  - property `circle` displays a mapbox circle.
+  - property `raster` displays a mapbox raster tiles.
+  - property `fill-extrusion` displays a layer with extruded buildings.
+  - property `background` displays a mapbox background layer.
+  - property `heatmap` displays a mapbox heatmap layer.
+- Source
 - GeoJSONLayer
-- Marker (Html marker)
-- Feature
-  - Layer type properties `symbol` display a mapbox symbol.
-  - Layer type properties `line` display a lineString.
-  - Layer type properties `fill` display a polygon.
-  - Layer type properties `fill-extrusion` to display a 3d extrusion layer.
-  - Layer type properties `circle` display a mapbox circle.
+
+### DOM components (normal React components)
 - ZoomControl
 - ScaleControl
-- Popup
+- RotationControl
+- Marker (Projected component)
+- Popup (Projected component)
+- Cluster
 
-## How to start
-
-```
-npm install simacan-react-mapbox-gl --save
-```
-
-Import the component :
+## Getting Started
 
 ```
+npm install react-mapbox-gl mapbox-gl --save
+```
+
+Example:
+
+```jsx
 // ES6
-import ReactMapboxGl, { FeatureLayer, Feature, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 
 // ES5
 var ReactMapboxGl = require("react-mapbox-gl");
 var Layer = ReactMapboxGl.FeatureLayer;
 var Feature = ReactMapboxGl.Feature;
+
+const Map = ReactMapboxGl({
+  accessToken: "pk.eyJ1IjoiZmFicmljOCIsImEiOiJjaWc5aTV1ZzUwMDJwdzJrb2w0dXRmc2d0In0.p6GGlfyV-WksaDV_KdN27A"
+});
+
+// in render()
+<Map
+  style="mapbox://styles/mapbox/streets-v9"
+  containerStyle={{
+    height: "100vh",
+    width: "100vw"
+  }}>
+    <Layer
+      type="symbol"
+      id="marker"
+      layout={{ "icon-image": "marker-15" }}>
+      <Feature coordinates={[-0.481747846041145, 51.3233379650232]}/>
+    </Layer>
+</Map>
 ```
 
-## Disclaimer
+## Why are `zoom`, `bearing` and `pitch` Arrays ?
+If those properties changed at the mapbox-gl-js level and you don't update the value kept in your state, it will be unsynced with the current viewport. At some point you might want to update the viewport value (zoom, pitch or bearing) with the ones in your state but using value equality is not enough. Taking zoom as example, you will still have the unsynced zoom value therefore we can't tell if you want to update the prop or not. In order to explicitly update the current viewport values you can instead break the references of those props and reliably update the current viewport with the one you have in your state to be synced again.
 
-The zoom property is an array on purpose. With a float as a value we can't tell whether the zoom has changed because `7 === 7 // true`. We did a work around using array so that `[7] !== [7] // true`, this way we can reliably update the zoom value.
+## [Version 3.0 Documentation](docs/API.md)
+## [Version 2.0 Documentation](https://github.com/alex3165/react-mapbox-gl/blob/v2-archive/docs/API.md)
 
-See https://github.com/alex3165/react-mapbox-gl/issues/57 for more informations.
+## Contributions
+Please try to reproduce your problem with the [boilerplate](https://github.com/alex3165/react-mapbox-gl-debug) or [this webpackbin template](https://www.webpackbin.com/bins/-L2MXLm-gCwvABQZfSnf) before posting an issue.
 
-## Examples
+## Built with react-mapbox-gl
+[monumap.org](https://monumap.org/)
 
-- See the example to display a big amount of markers : [London cycle example](example/src/london-cycle.js)
-- See the example to display all the availables shapes : [All shapes example](example/src/all-shapes.js)
-- See the example to display a GEOJson file : [geojson example](example/src/geojson-example.js)
-- See the example to display a WMS layer : [geojson example](example/src/WMSExample.js)
-- See the example to display a Raster layer : [geojson example](example/src/RasterExample.js)
+## mapbox-gl-draw compatibility
+Try [react-mapbox-gl-draw](https://github.com/amaurymartiny/react-mapbox-gl-draw)
 
-### Run the examples
-
-- Clone the repository
-- Go to example folder
-- Install the dependencies: `npm install`
-- Run the example
-  - Build the library `npm run build`
-  - Go to example folder `cd example`
-  - Run example `npm run start`
-  - Default port: `8080`
-
-## [API](docs/API.md)
+## Looking for an Angular alternative?
+Try [ngx-mapbox-gl](https://github.com/Wykks/ngx-mapbox-gl)

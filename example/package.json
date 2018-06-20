@@ -1,31 +1,41 @@
 {
   "name": "react-mapbox-gl-example",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "description": "An example for react-mapbox-gl",
   "license": "MIT",
+  "homepage": "http://alex3165.github.io/react-mapbox-gl",
   "scripts": {
-    "lint": "eslint -c ../.eslintrc src",
-    "lint:fix": "eslint --fix -c  ../.eslintrc src",
-    "start": "nodemon --watch ../lib server.js"
+    "start": "cross-env NODE_ENV=dev node dev.server.js",
+    "build": "cross-env NODE_ENV=prod webpack && cp dist/index.html dist/demos.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "immutable": "^3.8.0",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "xml2js": "^0.4.17"
+    "@types/enzyme": "2.8.10",
+    "immutable": "3.8.1",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
+    "react-live": "1.8.0-2",
+    "react-markdown": "2.5.1",
+    "react-router": "3.0.5",
+    "styled-components": "2.1.2",
+    "xml2js": "0.4.19"
   },
   "devDependencies": {
-    "babel-core": "^6.14.0",
-    "babel-loader": "^6.2.5",
-    "babel-preset-philpl": "^0.1.0",
-    "eslint": "^3.9.1",
-    "eslint-config-airbnb-base": "^9.0.0",
-    "eslint-plugin-import": "^2.1.0",
-    "eslint-plugin-react": "^6.5.0",
-    "json-loader": "^0.5.4",
-    "nodemon": "^1.10.2",
-    "webpack": "2.1.0-beta.21",
-    "webpack-dev-server": "^2.1.0-beta.0"
+    "@types/es6-promisify": "5.0.0",
+    "@types/react": "16.0.34",
+    "@types/react-dom": "16.0.3",
+    "@types/react-router": "3.0.13",
+    "@types/xml2js": "0.4.0",
+    "copy-webpack-plugin": "4.0.1",
+    "cross-env": "5.0.5",
+    "es6-promisify": "5.0.0",
+    "gh-pages": "1.0.0",
+    "html-webpack-plugin": "2.30.1",
+    "raw-loader": "0.5.1",
+    "ts-loader": "2.3.7",
+    "typescript": "2.5.3",
+    "webpack": "3.5.6",
+    "webpack-dev-server": "2.8.2"
   }
 }
